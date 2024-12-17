@@ -8,15 +8,11 @@ public class Client {
     static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        try (             Socket socket = new Socket(SERVER_ADDRESS, SERVER_PORT)) {
-
+        try (Socket socket = new Socket(SERVER_ADDRESS, SERVER_PORT)) {
             System.out.println("Подключение к серверу...");
-
             try (PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
                  BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
                 System.out.println("Подключение установлено.");
-
-                // Поток для прослушивания сообщений от сервера
                 Thread listenerThread = new Thread(() -> {
                     String serverMessage;
                     try {
